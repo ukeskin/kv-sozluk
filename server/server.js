@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 const mongo_url = process.env.MONGO_URI;
 console.log(mongo_url);
 const db = monk(mongo_url);
-const Emojis = db.get("emojis");
+const Terims = db.get("terims");
 
 //routes
 app.get("/", (req, res) => {
@@ -20,23 +20,23 @@ app.get("/", (req, res) => {
 });
 
 // fetch all data from database
-app.get("/api/emojis", (req, res) => {
-  Emojis.find().then((emojis) => {
-    res.json(emojis);
+app.get("/api/terims", (req, res) => {
+  Terims.find().then((terims) => {
+    res.json(terims);
   });
 });
 
 // fetch data from database by id
-app.get("/api/emojis/:id", (req, res) => {
-  Emojis.find({ _id: req.params.id }).then((emojis) => {
-    res.json(emojis);
+app.get("/api/terims/:id", (req, res) => {
+  Terims.find({ _id: req.params.id }).then((terims) => {
+    res.json(terims);
   });
 });
 
 // add data to database
-app.post("/api/emojis", (req, res) => {
+app.post("/api/terims", (req, res) => {
   try {
-    const data = Emojis.insert({ ...req.body });
+    const data = Terims.insert({ ...req.body });
     return res.json(data);
   } catch (error) {
     throw console.log(error);
@@ -44,10 +44,10 @@ app.post("/api/emojis", (req, res) => {
 });
 
 // update data to database by id
-app.patch("/api/emojis/:id", (req, res) => {
+app.patch("/api/terims/:id", (req, res) => {
   try {
     const { id } = req.params;
-    const data = Emojis.findOneAndUpdate({ _id: id }, { $set: req.body });
+    const data = Terims.findOneAndUpdate({ _id: id }, { $set: req.body });
     return res.json(data);
   } catch (error) {
     throw console.log(error);
@@ -55,9 +55,9 @@ app.patch("/api/emojis/:id", (req, res) => {
 });
 
 // delete data from database by id
-app.delete("/api/emojis/:id", (req, res) => {
+app.delete("/api/terims/:id", (req, res) => {
   try {
-    const data = Emojis.remove({ _id: req.params.id });
+    const data = Terims.remove({ _id: req.params.id });
     return res.json(data);
   } catch (error) {
     throw console.log(error);

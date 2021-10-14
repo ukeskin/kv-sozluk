@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "./Footer";
+const rest_api_url = process.env.REACT_APP_REST_API_URL;
 function Home() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(data);
@@ -12,22 +13,19 @@ function Home() {
     console.log(value);
     result = data.filter((data) => {
       return (
-        data.terim_tr.search(value) != -1 || data.terim_en.search(value) != -1
+        data.terim_tr.search(value) !== -1 || data.terim_en.search(value) !== -1
       );
     });
     setFilteredData(result);
   };
-
+  const fetchData = async () => {
+    axios(rest_api_url).then((res) => {
+      setData(res.data);
+      setFilteredData(res.data);
+      setLoading(false);
+    });
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      await axios(`https://express-monk-starter.vercel.app/api/emojis`).then(
-        (res) => {
-          setData(res.data);
-          setFilteredData(res.data);
-          setLoading(false);
-        }
-      );
-    };
     fetchData();
   }, []);
   return (

@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+const rest_api_url = process.env.REACT_APP_REST_API_URL;
 export default function Dashboard() {
   const { isAuthenticated, user } = useAuth0();
   return (
@@ -24,13 +24,14 @@ export default function Dashboard() {
 export function DashboardContent() {
   const [data, setData] = useState([]);
   const FetchData = () => {
-    fetch("https://express-monk-starter.vercel.app/api/emojis")
+    fetch(rest_api_url)
       .then((res) => res.json())
       .then((data) => setData(data));
   };
 
   useEffect(() => {
     FetchData();
+    console.log(rest_api_url);
   }, []);
 
   const handleSubmit = (event) => {
@@ -42,7 +43,7 @@ export function DashboardContent() {
       explaination_tr: formData.get("explaination_tr"),
       explaination_en: formData.get("explaination_en"),
     };
-    fetch("https://express-monk-starter.vercel.app/api/emojis", {
+    fetch(rest_api_url, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -62,7 +63,7 @@ export function DashboardContent() {
   };
 
   const handleDelete = (id) => {
-    fetch(`https://express-monk-starter.vercel.app/api/emojis/${id}`, {
+    fetch(`${rest_api_url}/${id}`, {
       method: "DELETE",
     }).then(FetchData);
     toast.warning("Deleted !", {
