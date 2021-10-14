@@ -1,9 +1,11 @@
 # KV Sözlük
 
 Kişisel Veriler Terim Sözlüğü
+# Screenrecord
+
+[screen record](http://i.imgur.com/zTONrOD.jpg)
 
 ## Installation
-
 
 
 ```bash
@@ -20,7 +22,7 @@ Dont forget check .env.example
 
 
 ## Toolbox
-ReactJS TailwindCSS ExpressJS Monk(monngodb) 
+ReactJS TailwindCSS ExpressJS Monk Auth0 
 
 
 ## License
