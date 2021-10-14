@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const rest_api_url = process.env.REACT_APP_REST_API_URL;
+const rest_api_url = "https://kv-sozluk-api.vercel.app/api/terims";
 export default function Dashboard() {
   const { isAuthenticated, user } = useAuth0();
   return (
